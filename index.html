@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>ionic路由嵌套</title>
+	<link rel="stylesheet" href="css/ionic.css">
+	<script src="js/ionic.bundle.js"></script>
+</head>
+<body>
+
+    <ion-nav-bar class="bar-positive">
+
+    </ion-nav-bar>
+	 <ion-nav-view></ion-nav-view>
+</body>
+	<script>
+		// 注意事项:views使用是由于路由命名了，如果没有命名则不需要views
+
+		var app = angular.module('myApp',['ionic']);
+		app.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider) {
+			$stateProvider.state('tabs',{
+				url:'/tab',
+				controller:'tabCtrl',
+				templateUrl:'template/tabs.html'
+			})
+			.state('tabs.home',{
+				url:'/home',
+				views:{
+					'home-tab':{
+						templateUrl:'template/home.html',
+						controller:'homeCtrl'
+					}
+				}
+			})
+			.state('tabs.facts',{
+				url:'/facts',
+				views:{
+					'home-tab':{
+						templateUrl:'template/facts.html'
+					}
+				}
+			})
+			.state('tabs.facts2',{
+				url:'/facts2',
+				views:{
+					'home-tab':{
+						templateUrl:'template/facts2.html'
+					}
+				}
+			})
+			.state('tabs.about',{
+				url:'/about',
+				views:{
+					'about-tab':{
+						templateUrl:'template/about.html'
+					}
+				}
+			})
+			.state('tabs.navstack',{
+				url:'/navstack',
+				views:{
+					'contact-tab':{
+						templateUrl:'template/nav-stack.html'
+					}
+				}
+			})
+			.state('tabs.contact',{
+				url:'/contact',
+				views:{
+					'contact-tab':{
+						templateUrl: "template/contact.html"
+					}
+				}
+			})
+			 $urlRouterProvider.otherwise("/tab/home");
+		}])
+
+		app.controller('tabCtrl', ['$scope', function($scope){
+			console.log(2);
+		}])
+
+		app.controller('homeCtrl', ['$scope', function($scope){
+			console.log(2);
+		}])
+
+	</script>
+</html>
